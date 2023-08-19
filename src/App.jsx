@@ -1,16 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
-import {  Banner, Navbar } from "./components";
+import {  Banner, Experience, Navbar } from "./components";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className='relative z-0 bg-slate-50 min-h-screen'>
+      <div className='relative z-0 min-h-screen'>
         <div className='bg-slate-50'>
           <Navbar />
           <Banner />
         </div>
-        {/* <About />
         <Experience />
+        {/* <About />
         <Tech />
         <Works />
         <Feedbacks />

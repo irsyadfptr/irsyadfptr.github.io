@@ -2,8 +2,9 @@ const StarWrapper = (Component, idName) =>
   function HOC() {
     return (
       <section
-        className={`bg-primary relative z-0`}
-      >
+        className={`${
+        idName === 'tech' ? 'bg-emerald-500' : 'bg-primary'
+        } relative z-0`}      >
         <span className='hash-span' id={idName}>
           &nbsp;
         </span>

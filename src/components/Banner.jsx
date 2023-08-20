@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef } from "react";
 import { styles } from "../styles";
 import { char } from "../assets";
@@ -8,6 +9,7 @@ const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(800 - Math.random() * 300); // Adjusted the delta value
+  // eslint-disable-next-line no-unused-vars
   const [_, setIndex] = useState(1);
   const toRotate = ["Web Developer", "Front-End Developer", "Software Developer", "Discord Dev & Mod", "Event Officer"];
   const period = 1000; // Adjusted the period value

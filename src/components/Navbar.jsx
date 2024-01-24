@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { styles } from "../styles";
-import { logo, menu, close } from "../assets";
+import { logo } from "../assets";
 
-const navLinks = [
-    {
-      id: "about",
-      title: "About",
-    },
-    {
-      id: "work",
-      title: "Work",
-    },
-    {
-      id: "contact",
-      title: "Contact",
-    },
-];
+// const navLinks = [
+//     {
+//       id: "about",
+//       title: "About",
+//     },
+//     {
+//       id: "work",
+//       title: "Work",
+//     },
+//     {
+//       id: "contact",
+//       title: "Contact",
+//     },
+// ];
 
 const Navbar = () => {
-  const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
+  // const [active, setActive] = useState("");
+  // const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Navbar = () => {
 
         </Link>
 
-        <ul className='list-none hidden sm:flex flex-row gap-10'>
+        {/* <ul className='list-none hidden sm:flex flex-row gap-10'>
           {navLinks.map((nav) => (
             <li
               key={nav.id}
@@ -71,9 +71,9 @@ const Navbar = () => {
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
-        </ul>
+        </ul> */}
 
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
+        {/* <div className='sm:hidden flex flex-1 justify-end items-center'>
           <img
             src={toggle ? close : menu}
             alt='menu'
@@ -103,7 +103,7 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

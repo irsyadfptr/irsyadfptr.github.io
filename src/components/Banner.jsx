@@ -100,10 +100,10 @@ const Banner = () => {
           <div className='w-1 sm:h-80 h-40 violet-gradient' />
         </div>
         <div>
-          <h1 className={`${styles.heroHeadText} text-slate-900`}>
+          <h1 className={`${styles.heroHeadText} text-black`}>
             Halo, I'm <span className='text-emerald-500'>Putranto</span>
           </h1>
-          <h1 className={`${styles.heroSubHeadText} text-slate-900`}>
+          <h1 className={`${styles.heroSubHeadText} text-black`}>
             a/an <span className='text-emerald-500' data-period="1000" data-rotate={JSON.stringify(toRotate)}>
                 <span className="wrap">{text}</span>
             </span>

@@ -100,15 +100,15 @@ const Banner = () => {
           <div className='w-1 sm:h-80 h-40 violet-gradient' />
         </div>
         <div>
-          <h1 className={`${styles.heroHeadText} text-black`}>
+          <h1 className={`${styles.heroHeadText}`} style={{	color: 'rgb(15 23 42)'}}>
             Halo, I'm <span className='text-emerald-500'>Putranto</span>
           </h1>
-          <h1 className={`${styles.heroSubHeadText} text-black`}>
+          <h1 className={`${styles.heroSubHeadText} text-black`}  style={{	color: 'rgb(15 23 42)'}}>
             a/an <span className='text-emerald-500' data-period="1000" data-rotate={JSON.stringify(toRotate)}>
                 <span className="wrap">{text}</span>
             </span>
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-slate-900`}>
+          <p className={`${styles.heroSubText} mt-2`}  style={{	color: 'rgb(15 23 42)'}}>
             I develop web application, landing <br className='sm:block hidden' />
             pages and discord bots for your community. <br className='sm:block hidden' />
             and... sometimes I manage an event for entertainment.

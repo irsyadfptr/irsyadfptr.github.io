@@ -4,6 +4,7 @@ import { technologies } from "../constants";
 import { styles } from "../styles";
 
 const TechStacks = () => {
+  console.log('test deploy')
   return (
     <div className='bg-emerald-500 py-10 px-40'>
       <div>

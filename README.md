@@ -14,7 +14,7 @@ A comic-book styled one-pager with a 3D sticker avatar: its eyes follow your cur
 
 ## Getting started
 
-Needs Node 20 or newer.
+Needs Node 24 (pinned in `package.json` `engines`, which Vercel also uses).
 
 ```bash
 npm install

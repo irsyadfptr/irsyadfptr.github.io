@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { experience } from '@/lib/content';
 import { Spark } from '../Doodles';
+import { asset } from '@/lib/asset';
 
 // a jagged line down the timeline; Motion draws it as you scroll through the section
 const PATH = 'M20 0 L 32 90 L 8 180 L 32 270 L 8 360 L 32 450 L 8 540 L 32 630 L 8 720 L 32 810 L 8 900 L 20 1000';
@@ -31,7 +32,7 @@ export function Experience() {
                   <article data-reveal
                     className={`panel bg-paper p-6 shadow-sticker lg:w-[88%] ${right ? 'lg:col-start-2 lg:ml-auto lg:rotate-1' : 'lg:-rotate-1'}`}>
                     <div className="flex items-center gap-4">
-                      <Image src={e.logo} alt={`${e.company} logo`} width={52} height={52} className="size-13 shrink-0 rounded-md border-[3px] border-ink object-cover" />
+                      <Image src={asset(e.logo)} alt={`${e.company} logo`} width={52} height={52} className="size-13 shrink-0 rounded-md border-[3px] border-ink object-cover" />
                       <div>
                         <h3 className="font-display text-lg leading-tight uppercase">{e.role}</h3>
                         <p className="font-bold text-muted">{e.company}</p>

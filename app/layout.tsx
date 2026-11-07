@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Archivo, Archivo_Black, Bangers } from 'next/font/google';
 import { site } from '@/lib/site';
 import './globals.css';
+import { asset } from '@/lib/asset';
 
 const archivo = Archivo({ subsets: ['latin'], variable: '--font-archivo' });
 const archivoBlack = Archivo_Black({ subsets: ['latin'], variable: '--font-archivo-black', weight: '400' });
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-  icons: { icon: '/icon.svg' },
+  icons: { icon: asset('/icon.svg') },
   openGraph: {
     type: 'profile',
     url: '/',

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { stack } from '@/lib/content';
 import { ActionLines } from '../Doodles';
+import { asset } from '@/lib/asset';
 
 const ROT = [-6, 4, -3, 7, -5, 2, 6, -4];
 const BG = ['bg-paper', 'bg-yellow', 'bg-paper', 'bg-cyan/40', 'bg-paper', 'bg-red/20', 'bg-paper', 'bg-blue/15'];
@@ -21,7 +22,7 @@ export function Stack() {
             <li key={icon} data-speed={i % 2 ? '0.06' : '-0.06'} className="flex justify-center">
               <div data-reveal style={{ '--r': `${ROT[i % ROT.length]}deg` } as React.CSSProperties}
                 className={`panel grid aspect-square w-full max-w-28 place-items-center gap-1 p-3 shadow-sticker [rotate:var(--r)] hover:animate-[wiggle_.45s_ease-in-out] ${BG[i % BG.length]}`}>
-                <Image src={`/icons/${icon}.svg`} alt="" width={44} height={44} className="size-10 object-contain sm:size-11" />
+                <Image src={asset(`/icons/${icon}.svg`)} alt="" width={44} height={44} className="size-10 object-contain sm:size-11" />
                 <span className="text-center text-xs leading-tight font-extrabold uppercase sm:text-[13px]">{label}</span>
               </div>
             </li>

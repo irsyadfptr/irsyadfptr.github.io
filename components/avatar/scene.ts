@@ -2,6 +2,7 @@
 // Eyes follow the pointer anywhere on the page; drag (or arrow keys) to turn it, click the bubble gum to blow it
 // until it pops, click the avatar to fire the tool stickers off like torpedoes (and open the stats card). Coins drift while it is on screen; pause and reduced motion stop that.
 import * as THREE from 'three';
+import { asset } from '@/lib/asset';
 
 const ART = 400; // char.png is 400x400
 const B = 14; // die-cut border (white, then ink), px
@@ -82,7 +83,7 @@ async function iconCoin(name: string, i: number) {
   x.fillStyle = TINTS[i % TINTS.length]; x.fill();
   x.lineJoin = 'round'; x.lineWidth = 5; x.strokeStyle = '#111111'; x.stroke();
   try {
-    const img = await loadImage(`/icons/${name}.svg`);
+    const img = await loadImage(asset(`/icons/${name}.svg`));
     const s = 104 / Math.max(img.width || 1, img.height || 1);
     const w = (img.width || 104) * s, h = (img.height || 104) * s;
     x.drawImage(img, 128 - w / 2, 128 - h / 2, w, h);
@@ -114,7 +115,7 @@ export async function mountAvatar(stage: HTMLElement, onReady: () => void, onPok
   const spinner = new THREE.Group(); world.add(spinner); // turns with a drag and the scroll
   const hopper = new THREE.Group(); spinner.add(hopper); // the standee
 
-  const img = await loadImage('/char.png');
+  const img = await loadImage(asset('/char.png'));
   const cut = dieCut(img);
   const geo = new THREE.PlaneGeometry(cut.w, cut.h);
   const yMid = ART_BOTTOM + cut.h / 2;

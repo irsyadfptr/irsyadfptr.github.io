@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import type { AvatarControls } from './scene';
+import { asset } from '@/lib/asset';
 
 export function Avatar3D({ className = '', onPoke }: { className?: string; onPoke?: () => void }) {
   const stage = useRef<HTMLDivElement>(null);
@@ -38,7 +39,7 @@ export function Avatar3D({ className = '', onPoke }: { className?: string; onPok
   return (
     <div ref={stage} className={`relative ${className}`}>
       <Image
-        src="/char.png"
+        src={asset('/char.png')}
         alt="Putranto's avatar: a cartoon of him in a teal dinosaur hoodie, blowing pink bubble gum"
         width={400}
         height={400}

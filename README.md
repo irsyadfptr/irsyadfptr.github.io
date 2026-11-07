@@ -24,6 +24,17 @@ npm run start   # serve the build
 npm run lint
 ```
 
+## Deploying
+
+- **Vercel (main site):** push to `main`. `vercel.json` sets the Next.js preset and `package.json` pins Node 24.
+- **GitHub Pages (mirror):** `.github/workflows/pages.yml` builds a static export into `out/` on every push to `main`
+  and publishes it. One-time setup: repo **Settings → Pages → Source: GitHub Actions**. A repo named
+  `irsyadfptr.github.io` serves at the root; any other repo name serves under `/<repo>`, and the workflow passes that
+  base path to the build. Public files are linked through `lib/asset.ts` so they resolve under either path.
+  Canonical links and the sitemap still point at the Vercel URL in `lib/site.ts`.
+- Local Pages test: `GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/portofolio npm run build`, then serve `out/` under
+  `/portofolio`. In Git Bash prefix the command with `MSYS_NO_PATHCONV=1`.
+
 ## Where things live
 
 | Path | What it is |

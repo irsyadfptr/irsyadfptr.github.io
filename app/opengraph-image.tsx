@@ -4,6 +4,8 @@ import { ImageResponse } from 'next/og';
 import { site } from '@/lib/site';
 
 // The share card for LinkedIn, X, Slack and search: the comic look, the name, the role and the avatar.
+export const dynamic = 'force-static';
+
 export const alt = `${site.name}, senior frontend engineer (React, Next.js)`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';

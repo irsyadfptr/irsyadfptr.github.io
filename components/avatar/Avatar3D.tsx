@@ -16,18 +16,28 @@ export function Avatar3D({ className = '', onPoke }: { className?: string; onPok
 
   useEffect(() => {
     let cancelled = false;
-    // three.js loads after the poster has painted; a failure leaves the poster in place
-    import('./scene')
-      .then(({ mountAvatar }) => mountAvatar(stage.current!, () => !cancelled && setLive(true), () => poke.current?.()))
-      .then((c) => {
-        if (cancelled) c?.destroy();
-        else {
-          controls.current = c;
-          setCanPause(!!c && !matchMedia('(prefers-reduced-motion: reduce)').matches);
-        }
-      })
-      .catch((e) => console.warn('avatar scene', e));
-    return () => { cancelled = true; controls.current?.destroy(); controls.current = null; };
+    // three.js (~600 KB) loads on the visitor's first move, touch, scroll or key press, not with the page,
+    // so the first load stays light; the flat poster stands in until then. A failure leaves the poster.
+    const events = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'] as const;
+    const start = () => {
+      events.forEach((ev) => removeEventListener(ev, start));
+      import('./scene')
+        .then(({ mountAvatar }) => mountAvatar(stage.current!, () => !cancelled && setLive(true), () => poke.current?.()))
+        .then((c) => {
+          if (cancelled) c?.destroy();
+          else {
+            controls.current = c;
+            setCanPause(!!c && !matchMedia('(prefers-reduced-motion: reduce)').matches);
+          }
+        })
+        .catch((e) => console.warn('avatar scene', e));
+    };
+    events.forEach((ev) => addEventListener(ev, start, { once: true, passive: true }));
+    return () => {
+      cancelled = true;
+      events.forEach((ev) => removeEventListener(ev, start));
+      controls.current?.destroy(); controls.current = null;
+    };
   }, []);
 
   function toggle() {
@@ -44,7 +54,8 @@ export function Avatar3D({ className = '', onPoke }: { className?: string; onPok
         width={400}
         height={400}
         priority
-        className={`absolute inset-x-0 bottom-0 mx-auto h-[85%] w-auto object-contain object-bottom ${live ? "invisible" : ""}`}
+        onClick={() => poke.current?.()} // a click that lands before the 3D scene has loaded still opens the stats
+        className={`absolute inset-x-0 bottom-0 mx-auto h-[85%] w-auto cursor-pointer object-contain object-bottom ${live ? "invisible" : ""}`}
       />
       {canPause && (
         <button

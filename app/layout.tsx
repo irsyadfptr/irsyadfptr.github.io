@@ -4,7 +4,8 @@ import { site } from '@/lib/site';
 import './globals.css';
 import { asset } from '@/lib/asset';
 
-const archivo = Archivo({ subsets: ['latin'], variable: '--font-archivo' });
+// body text: 'optional' paints once with whatever font is ready (preloaded, so usually Archivo) instead of re-rendering on swap
+const archivo = Archivo({ subsets: ['latin'], variable: '--font-archivo', display: 'optional' });
 const archivoBlack = Archivo_Black({ subsets: ['latin'], variable: '--font-archivo-black', weight: '400' });
 const bangers = Bangers({ subsets: ['latin'], variable: '--font-bangers', weight: '400' });
 

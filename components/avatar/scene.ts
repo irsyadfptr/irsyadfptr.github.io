@@ -34,9 +34,11 @@ function dieCut(img: HTMLImageElement) {
   sx.globalCompositeOperation = 'source-in';
   sx.fillStyle = '#fff'; sx.fillRect(0, 0, w, h);
   // comic sticker edge: a thick ink line outside a white die-cut border
+  // dilate by stamping the silhouette around a circle; two radii are enough because each shifted copy also
+  // covers the band between the shape and the stamp (kept low: this runs on the main thread at start-up)
   const grow = (into: CanvasRenderingContext2D, src: HTMLCanvasElement, max: number) => {
-    for (let r = 2; r <= max; r += 3) for (let a = 0; a < 36; a++) {
-      into.drawImage(src, Math.cos((a / 36) * Math.PI * 2) * r, Math.sin((a / 36) * Math.PI * 2) * r);
+    for (const r of [max / 2, max]) for (let a = 0; a < 24; a++) {
+      into.drawImage(src, Math.cos((a / 24) * Math.PI * 2) * r, Math.sin((a / 24) * Math.PI * 2) * r);
     }
   };
   const inkSil = canvas2d(w, h), ix = ctx(inkSil);

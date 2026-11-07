@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* Comic / street sketch: newsprint, thick ink, halftone dots, punchy primaries. */
+@theme {
+  --color-paper: #f4f1ea;
+  --color-paper-2: #e9e4d8;
+  --color-ink: #111111;
+  --color-muted: #3d3a35;
+  --color-yellow: #ffcc00;
+  --color-red: #e63946;
+  --color-blue: #1d4ed8;
+  --color-cyan: #2ec4d6;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo-black), var(--font-archivo), sans-serif;
+  --font-comic: var(--font-bangers), var(--font-archivo-black), sans-serif;
+  --shadow-sticker: 5px 5px 0 var(--color-ink);
+  --shadow-sticker-lg: 9px 9px 0 var(--color-ink);
+}
+
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 6rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background-color: var(--color-paper);
+  /* newsprint grain: a fine dot screen */
+  background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 10%, transparent) 0.9px, transparent 1.3px);
+  background-size: 7px 7px;
+  color: var(--color-ink);
+}
+
+/* a comic panel: thick ink frame, near-square corners */
+@utility panel {
+  border: 3px solid var(--color-ink);
+  border-radius: 6px;
+}
+
+/* halftone dots in a colour, fading out from one corner; put it on a layer behind content */
+@utility halftone {
+  background-image: radial-gradient(currentColor 30%, transparent 32%);
+  background-size: 12px 12px;
+  mask-image: radial-gradient(circle at var(--at, 100% 0%), #000 0%, transparent 70%);
+}
+
+/* comic button: hard ink shadow, punches in on click */
+@utility sticker-btn {
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-sticker);
+  transition: transform .12s ease, box-shadow .12s ease;
+  &:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--color-ink); }
+  &:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--color-ink); }
+  &:focus-visible { outline: 3px solid var(--color-blue); outline-offset: 4px; }
+}
+
+/* once JS runs (html.js): doodles draw themselves and panels pop in as they reach the screen; without it all shows */
+.draw path { stroke-dasharray: 1; transition: stroke-dashoffset 0.9s cubic-bezier(.6, 0, .3, 1); }
+.js .draw:not(.is-in) path { stroke-dashoffset: 1; }
+[data-reveal] { transition: opacity .45s ease, scale .5s cubic-bezier(.3, 1.8, .5, 1); transition-delay: calc(var(--i, 0) * 70ms); }
+.js [data-reveal]:not(.is-in) { opacity: 0; scale: .85; }
+[data-speed], [data-depth] { will-change: transform; }
+/* stat bars fill block by block once the card is on screen */
+.stats .seg { transform-origin: left; transition: scale .25s ease-out var(--d, 0ms); }
+@media (min-width: 1024px) { .stats[data-open="false"] .seg { scale: 0 1; transition-delay: 0ms; } }
+/* the POW flash behind the stats card when the avatar is clicked */
+@keyframes pow { 0% { scale: .2; opacity: 1; } 55% { scale: 1.1; opacity: 1; } 100% { scale: 1.3; opacity: 0; } }
+
+/* typed role caret */
+.caret::after { content: ""; display: inline-block; width: .08em; height: .85em; margin-left: .05em; vertical-align: -.06em; background: currentColor; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+
+/* uses the rotate property, so it never fights the parallax transform */
+@keyframes wiggle { 0%, 100% { rotate: var(--r, 0deg); } 25% { rotate: calc(var(--r, 0deg) - 8deg); } 75% { rotate: calc(var(--r, 0deg) + 8deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .caret::after, [class*="animate-"] { animation: none !important; }
+  .draw path { transition: none; stroke-dashoffset: 0; }
+}
+
+/* nav: blends into the page at the top, becomes a comic panel once the page scrolls (html.scrolled, set by Motion) */
+.site-nav { background: transparent; border-color: transparent; box-shadow: none; transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; }
+html.scrolled .site-nav { background: var(--color-paper); border-color: var(--color-ink); box-shadow: var(--shadow-sticker); }

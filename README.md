@@ -1,8 +1,61 @@
-# React + Vite
+# Putranto portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal site of **Irsyad Fakhri Putranto**, senior frontend engineer in Jakarta. Live at [putranto-dev.vercel.app](https://putranto-dev.vercel.app).
 
-Currently, two official plugins are available:
+A comic-book styled one-pager with a 3D sticker avatar: its eyes follow your cursor, you can drag it around, pop its bubble gum, and click it to fire the tool stickers off like torpedoes and open the player stats card.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack
+
+- [Next.js 16](https://nextjs.org) (App Router, every route prerendered as static)
+- [React 19](https://react.dev) + TypeScript
+- [Tailwind CSS 4](https://tailwindcss.com) (theme tokens in `app/globals.css`)
+- [three.js](https://threejs.org) for the avatar scene
+- Fonts: Archivo, Archivo Black and Bangers via `next/font`
+
+## Getting started
+
+Needs Node 20 or newer.
+
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run start   # serve the build
+npm run lint
+```
+
+## Where things live
+
+| Path | What it is |
+| --- | --- |
+| `lib/content.ts` | All page copy: roles, work cards, experience, tool stack, social links |
+| `lib/site.ts` | Name, URL, title, description and skills used for SEO and the share image |
+| `app/page.tsx` | Page assembly and the JSON-LD profile for search engines |
+| `app/layout.tsx` | Fonts and metadata (title, Open Graph, Twitter, canonical, robots) |
+| `app/opengraph-image.tsx` | The generated 1200×630 share card (also used for Twitter) |
+| `app/sitemap.ts`, `app/robots.ts` | `sitemap.xml` and `robots.txt` |
+| `app/globals.css` | Palette, comic utilities (`panel`, `sticker-btn`, `halftone`) and animation rules |
+| `components/sections/` | Nav, Hero, Work, Experience, Stack and Contact sections |
+| `components/HeroStage.tsx` | Avatar column of the hero and the click-to-open stats card |
+| `components/avatar/scene.ts` | The three.js scene: standee, eye tracking, bubble, orbiting stickers, torpedo scatter |
+| `components/Motion.tsx` | Scroll and pointer parallax, reveal-on-scroll, the nav's scrolled state |
+| `components/StatsCard.tsx` | Player stats card and the availability caption |
+| `components/Doodles.tsx` | Hand-drawn SVG doodles (bursts, zaps, arrows, underlines) |
+| `public/` | Avatar (`char.png`), company logos and tool icons |
+
+## Editing
+
+- **Copy and projects:** edit `lib/content.ts`. Work cards, experience rows and stack tiles render from it.
+- **Stats levels:** edit the `stats` list at the top of `components/StatsCard.tsx`.
+- **Domain:** change `url` in `lib/site.ts`; canonical URL, sitemap, robots and the share image follow it.
+- **Avatar:** replace `public/char.png` (400×400 PNG with transparency). The eye and bubble positions in `components/avatar/scene.ts` (`EYES`, `BUBBLE`) are measured for the current art and need re-measuring for a new one.
+
+## Accessibility and motion
+
+- Visitors with *reduce motion* turned on get no parallax, typing, reveals or flying stickers; everything is shown at rest.
+- The floating stickers have a pause button; the avatar is keyboard focusable (arrow keys turn it, Enter blows the bubble) and the stats card has its own show/hide buttons.
+- Without WebGL the avatar falls back to the flat image.
+
+## Credits
+
+Tool logos are trademarks of their owners and come from [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0).

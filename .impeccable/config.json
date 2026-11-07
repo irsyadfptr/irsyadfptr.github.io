@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-07T06:01:22.995Z",
+        "reason": "Claude: type sizes come from public/kit/system.css tokens (h1 72, h2 48, lead 20, body 16), which the static scan of index.html cannot see; rendered screenshot confirms the hierarchy"
+      }
+    ]
+  }
+}
